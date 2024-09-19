@@ -1,53 +1,67 @@
 package com.example.numplay;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.*;
 import java.util.InputMismatchException;
-import java.util.Scanner;
-import java.util.StringTokenizer;
 
 public class GamePlay { // 게임 플레이를 위한 기본 설정 및 출력 클래스
 
-    private int digits, strike, ball, out; 
-    // 자릿수, 스트라이크 카운트, 볼 카운트, 아웃 카운트
-    // GamePlay 가 새로 생성될때마다 각 올바른 값으로 초기화 되어야 한다.
+    private Set<Integer> pitch;
+    private int digits, strike, ball, out;
 
-    public GamePlay(){
-        this(3); // 기본 생성자로 세자리 입력 받로고 함
-    }
-    public GamePlay(int digits){
+
+    public GamePlay(int digits) { // 초기 세팅
         this.digits = digits;
+        pitch = new HashSet<>();
+
         this.strike = 0;
         this.ball = 0;
         this.out = 0;
     }
 
-    public void play() {
+    public void play() throws IOException {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer("");
-        Scanner sc = new Scanner(System.in);
 
-        try{
-            while(true){
-                System.out.println("< 게임을 시작합니다 >");
-                System.out.println("숫자를 입력하세요");
+        while (true) {
+            try {
+                System.out.println("\n숫자를 입력하세요");
+
+                String input = br.readLine();
+
+                if(input.length() != digits){
+                    throw new CustomInputMismatchException();
+                }
+
+                for (int i = 0; i < digits; i++) {
+                    char c = input.charAt(i);
+                    if(!Character.isDigit(c)){ // 숫자가 아닌 값이 들어온 경우
+                        throw new CustomInputMismatchException();
+                    }
+                    pitch.add(Character.getNumericValue(c));
+                }
+                System.out.println("입력된 숫자:" + pitch);
 
 
+                if (pitch.size() != digits) { // 저장된 자리수가 다른 경우 아래 예외 발생시키기 (중복의 경우)
+                    throw new CustomInputMismatchException();
+                }
 
+                System.out.println(input);
+                pitch.clear();// 올바른 입력을 받기 위해 초기화
+                break;
 
+            } catch (CustomInputMismatchException e) {
+                System.out.println(e.getMessage());
             }
 
-        }catch(InputMismatchException e){
-            System.out.println(e.getMessage());
+
         }
 
 
-
-        sc.close();
     }
-
-    
 
 
 }
