@@ -31,7 +31,7 @@ public class BaseballGameDisplay {
         else{
             int start = 1;
             for (Integer integer : history) {
-                System.out.println(start + "번째 게임 : 시도 횟수 -  " + integer);
+                System.out.println(start++ + "번째 게임 : 시도 횟수 -  " + integer);
             }
             System.out.println();
         }

@@ -38,7 +38,7 @@ public class GamePlay { // 게임 플레이를 위한 기본 설정 및 출력 �
     public int play() throws IOException {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        makeRandomNumber(3);
+        makeRandomNumber(digits);
 
         while (true) {
             try {
