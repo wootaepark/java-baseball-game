@@ -9,7 +9,7 @@ public class GamePlay { // 게임 플레이를 위한 기본 설정 및 출력 �
 
     private Set<Integer> pitch; // 유저가 입력한 정보
     private List<Integer> answer; // 정답 정보
-    private int digits, strike, ball, out, game_count;
+    private int digits, strike, ball, game_count;
 
 
     public GamePlay(int digits) { // 초기 세팅
@@ -18,7 +18,6 @@ public class GamePlay { // 게임 플레이를 위한 기본 설정 및 출력 �
         answer = new ArrayList<>(); // 정답 관리
 
         this.game_count = 0; // 게임 시도 횟수 초기화
-        this.out = 0; // 3out 관리
     }
 
     public void makeRandomNumber(int digits) {
