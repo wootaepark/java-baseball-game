@@ -1,6 +1,5 @@
 package com.example.numplay;
 
-import java.util.Iterator;
 import java.util.List;
 
 public class BaseballGameDisplay {
